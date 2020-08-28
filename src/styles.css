@@ -1,4 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: #404c51;
+  padding: 3px;
+}
+
+label {
+  font-weight: bold;
+  margin: 3px;
+}
+
+label.block {
+  display: block;
+}
+
+td.data {
+  text-align: center !important;
+  width: 95px;
+}
+
+td.valor {
+  text-align: right !important;
+  width: 95px;
+}
+
+@media(min-width: 1200px) {
+  .container {
+    width: 1170px;
+    margin: 0 auto;
+  }
+}
