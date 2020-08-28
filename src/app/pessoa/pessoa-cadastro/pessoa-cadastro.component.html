@@ -1,0 +1,150 @@
+<div class="container">
+  <div>
+    <h1 style="font-weight: bold;">Nova Pessoa</h1>
+    <hr>
+  </div>
+  <form #formPessoa="ngForm" id="formPessoa" action="">
+    <div class="form-group">
+      <label for="nome" class="block form-control-label">Nome</label>
+      <input
+        inputId="nome"
+        type="text"
+        placeholder="Nome"
+        class="form-control"
+        pInputText
+        required
+        minlength="5"
+        name="nome"
+        ngModel
+        #nome="ngModel"
+      />
+      <app-message [control]="nome" [validators]="{required: 'Obrigatório', minlength: 'Mínimo de 5 caracteres.'}"></app-message>
+    </div>
+    <div class="form-group">
+      <label for="logradouro" class="block form-control-label"
+        >Logradouro</label
+      >
+      <input
+        inputId="logradouro"
+        type="text"
+        placeholder="Logradouro"
+        class="form-control"
+        pInputText
+        required
+        minlength="5"
+        name="logradouro"
+        ngModel
+        #logradouro="ngModel"
+      />
+      <app-message [control]="logradouro" [validators]="{required: 'Obrigatório', minlength: 'Mínimo de 5 caracteres.'}"></app-message>
+    </div>
+    <div class="form-group">
+      <label for="numero" class="block form-control-label">Número</label>
+      <input
+        inputId="numero"
+        type="text"
+        placeholder="Número"
+        class="form-control"
+        pInputText
+        required
+        name="numero"
+        ngModel
+        #numero="ngModel"
+      />
+      <app-message [control]="numero" [validators]="{required: 'Obrigatório'}"></app-message>
+    </div>
+    <div class="form-group">
+      <label for="complemento" class="block form-control-label"
+        >Complemento</label
+      >
+      <input
+        inputId="complemento"
+        type="text"
+        placeholder="Complemento"
+        class="form-control"
+        pInputText
+      />
+    </div>
+    <div class="form-group">
+      <label for="bairro" class="block form-control-label">Bairro</label>
+      <input
+        inputId="bairro"
+        type="text"
+        placeholder="Bairro"
+        class="form-control"
+        pInputText
+        required
+        name="bairro"
+        ngModel
+        #bairro="ngModel"
+      />
+      <app-message [control]="bairro" [validators]="{required: 'Obrigatório'}"></app-message>
+    </div>
+    <div class="form-group">
+      <label for="cep" class="block form-control-label">CEP</label>
+      <p-inputMask
+        inputId="cep"
+        mask="99.999-999"
+        placeholder="99.999-999"
+        pInputTextmask
+        required
+        name="cep"
+        ngModel
+        #cep="ngModel"
+      ></p-inputMask>
+      <app-message [control]="cep" [validators]="{required: 'Obrigatório'}"></app-message>
+    </div>
+    <div class="form-group">
+      <label for="cidade" class="block form-control-label">Cidade</label>
+      <input
+        inputId="cidade"
+        type="text"
+        placeholder="Cidade"
+        class="form-control"
+        pInputText
+        required
+        name="cidade"
+        ngModel
+        #cidade="ngModel"
+      />
+      <app-message [control]="cidade" [validators]="{required: 'Obrigatório'}"></app-message>
+    </div>
+    <div class="form-group">
+      <label for="estado" class="block form-control-label">Estado</label>
+      <input
+        inputId="estado"
+        type="text"
+        placeholder="Estado"
+        class="form-control"
+        pInputText
+        required
+        name="estado"
+        ngModel
+        #estado="ngModel"
+      />
+      <app-message [control]="estado" [validators]="{required: 'Obrigatório'}"></app-message>
+    </div>
+    <div class="form-group">
+      <button
+        pButton
+        pRipple
+        type="submit"
+        label="Salvar"
+        icon="pi pi-save"
+        [disabled]="formPessoa.invalid"
+      ></button>
+      &nbsp;
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Novo"
+        icon="pi pi-user-plus"
+      ></button>
+      <p-button
+        label="Voltar para a pesquisa"
+        styleClass="p-button-link"
+      ></p-button>
+    </div>
+  </form>
+</div>

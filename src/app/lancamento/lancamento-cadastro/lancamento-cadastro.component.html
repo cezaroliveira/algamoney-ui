@@ -1,0 +1,161 @@
+<div class="container">
+  <div>
+    <h1 style="font-weight: bold;">Novo Lançamento</h1>
+    <hr>
+  </div>
+  <form #formLancamento="ngForm" action="">
+    <div class="form-group">
+      <p-selectButton
+        [options]="[
+          { label: 'RECEITA', value: 'RECEITA' },
+          { label: 'DESPESA', value: 'DESPESA' }
+        ]"
+        required
+        name="tipoLancamento"
+        ngModel
+        #tipoLancamento="ngModel"
+      ></p-selectButton>
+      <app-message [control]="tipoLancamento" [validators]="{required: 'Obrigatório'}"></app-message>
+    </div>
+    <div class="form-group">
+      <div class="p-grid">
+        <div class="p-col-4">
+          <label for="dtVencimento" class="block form-control-label"
+            >Vencimento</label
+          >
+          <p-calendar
+            inputId="dtVencimento"
+            [showIcon]="true"
+            [locale]="pt"
+            dateFormat="dd/mm/yy"
+            [monthNavigator]="true"
+            [yearNavigator]="true"
+            yearRange="2000:2030"
+            required
+            name="dtVencimento"
+            ngModel
+            #dtVencimento="ngModel"
+          ></p-calendar>
+          <app-message [control]="dtVencimento" [validators]="{required: 'Obrigatório'}"></app-message>
+        </div>
+        <div class="p-col-4">
+          <label
+            for="dtPagamentoRecebimento"
+            class="block form-control-label"
+            >{{ tipoLancamento.value === "DESPESA" ? "Pagamento" : "Recebimento" }}</label
+          >
+          <p-calendar
+            inputId="dtPagamentoRecebimento"
+            [showIcon]="true"
+            [locale]="pt"
+            dateFormat="dd/mm/yy"
+            [monthNavigator]="true"
+            [yearNavigator]="true"
+            yearRange="2000:2030"
+            required
+            name="dtPagamentoRecebimento"
+            ngModel
+            #dtPagamentoRecebimento="ngModel"
+          ></p-calendar>
+          <app-message [control]="dtPagamentoRecebimento" [validators]="{required: 'Obrigatório'}"></app-message>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="descricao" class="block form-control-label">Descrição</label>
+      <input
+        inputId="descricao"
+        type="text"
+        placeholder="Descrição"
+        class="form-control"
+        pInputText
+        required
+        minlength="5"
+        name="descricao"
+        ngModel
+        #descricao="ngModel"
+      />
+      <app-message [control]="descricao" [validators]="{required: 'Obrigatório', minlength: 'Mínimo de 5 caracteres.'}"></app-message>
+      <label for="valor" class="block form-control-label">Valor</label>
+      <p-inputNumber
+        inputId="valor"
+        mode="currency"
+        currency="BRL"
+        locale="pt-BR"
+        placeholder="0,00"
+        required
+        name="valor"
+        ngModel
+        #valor="ngModel"
+      ></p-inputNumber>
+      <app-message [control]="valor" [validators]="{required: 'Obrigatório'}"></app-message>
+    </div>
+    <div class="form-group">
+      <label for="categoria" class="block form-control-label">Categoria</label>
+      <p-dropdown
+        [options]="categorias"
+        optionLabel="nome"
+        [filter]="true"
+        [showClear]="true"
+        inputId="categoria"
+        placeholder="Categoria"
+        required
+        name="categoria"
+        ngModel
+        #categoria="ngModel"
+      ></p-dropdown>
+      <app-message [control]="categoria" [validators]="{required: 'Obrigatório'}"></app-message>
+      <label for="pessoa" class="block form-control-label">Pessoa</label>
+      <p-dropdown
+        [options]="pessoas"
+        optionLabel="nome"
+        [filter]="true"
+        [showClear]="true"
+        inputId="pessoa"
+        placeholder="Pessoa"
+        required
+        name="pessoa"
+        ngModel
+        #pessoa="ngModel"
+      ></p-dropdown>
+      <app-message [control]="pessoa" [validators]="{required: 'Obrigatório'}"></app-message>
+    </div>
+    <div class="form-group">
+      <label for="observacao" class="block form-control-label"
+        >Observação</label
+      >
+      <textarea
+        rows="5"
+        cols="30"
+        placeholder="Observação detalhada sobre um lançamento"
+        inputId="observacao"
+        class="form-control"
+        pInputTextarea
+      ></textarea>
+    </div>
+    <div class="form-group">
+      <button
+        pButton
+        pRipple
+        type="submit"
+        label="Salvar"
+        icon="pi pi-save"
+        [disabled]="formLancamento.invalid"
+      ></button>
+      &nbsp;
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Novo"
+        icon="pi pi-user-plus"
+      ></button>
+      <p-button
+        label="Voltar para a pesquisa"
+        styleClass="p-button-link"
+      ></p-button>
+    </div>
+    {{formLancamento.control | json}}
+    {{formLancamento.invalid}}
+  </form>
+</div>

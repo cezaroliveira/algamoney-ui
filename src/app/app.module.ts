@@ -1,68 +1,69 @@
-import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { NgModule, DEFAULT_CURRENCY_CODE, ɵDEFAULT_LOCALE_ID } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+
+import { CalendarModule } from 'primeng/calendar';
+import { TableModule } from 'primeng/table';
+import { TooltipModule } from 'primeng/tooltip';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputMaskModule } from 'primeng/inputmask';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { SelectButtonModule } from 'primeng/selectbutton';
+
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { faCoffee, fas } from '@fortawesome/free-solid-svg-icons';
 
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {MatBadgeModule} from '@angular/material/badge';
-import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
-import {MatButtonModule} from '@angular/material/button';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {MatCardModule} from '@angular/material/card';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatChipsModule} from '@angular/material/chips';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatIconModule} from '@angular/material/icon';
-import {MatInputModule} from '@angular/material/input';
-import {MatListModule} from '@angular/material/list';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatRadioModule} from '@angular/material/radio';
-import {MatSelectModule} from '@angular/material/select';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatSliderModule} from '@angular/material/slider';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatSortModule} from '@angular/material/sort';
-import {MatTableModule} from '@angular/material/table';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatTreeModule} from '@angular/material/tree';
+import { CoreModule } from './core/core.module';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { CategoriaCadastroComponent } from './categoria-cadastro/categoria-cadastro.component';
+import { PessoaModule } from './pessoa/pessoa.module';
+import { LancamentoModule } from './lancamento/lancamento.module';
+import { CampoColoridoDirective } from './campo-colorido.directive';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CampoColoridoDirective,
+    CategoriaCadastroComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FormsModule,
+
+    // FontAwesome
     FontAwesomeModule,
-    MatRadioModule,
-    MatSidenavModule
+
+    // PrimeNG
+    CalendarModule,
+    TableModule,
+    TooltipModule,
+    NgbModule,
+    DropdownModule,
+    InputMaskModule,
+    InputNumberModule,
+    SelectButtonModule,
+
+    // Local
+    CoreModule,
+    LancamentoModule,
+    PessoaModule,
   ],
-  providers: [],
+  providers: [
+    {provide: DEFAULT_CURRENCY_CODE, useValue: 'BRL'},
+    {provide: ɵDEFAULT_LOCALE_ID, useValue: 'pt-PT'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor(library: FaIconLibrary) {
     // Add an icon to the library for convenient access in other components
-    library.addIcons(faCoffee);
+    // library.addIcons(faCoffee);
     // Add an package to the library for convenient access in other components
-    library.addIconPacks(fas);
+    // library.addIconPacks(fas);
   }
 }
