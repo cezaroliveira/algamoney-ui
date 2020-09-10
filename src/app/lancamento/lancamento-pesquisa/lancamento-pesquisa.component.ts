@@ -1,3 +1,4 @@
+import { LancamentoService } from './../lancamento.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -5,30 +6,40 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './lancamento-pesquisa.component.html',
   styleUrls: ['./lancamento-pesquisa.component.css'],
 })
-export class LancamentoPesquisaComponent {
-  lancamentos = [
-    new Lancamento(
-      'Restaurante',
-      new Date('07/08/2020'),
-      new Date('07/08/2020'),
-      15.98,
-      'DESPESA'
-    ),
-    new Lancamento(
-      'Salário',
-      new Date('07/08/2020'),
-      new Date('07/08/2020'),
-      120,
-      'RECEITA'
-    ),
-    new Lancamento(
-      'Abastecimento',
-      new Date('07/08/2020'),
-      new Date('07/08/2020'),
-      120,
-      'DESPESA'
-    ),
-  ];
+export class LancamentoPesquisaComponent implements OnInit {
+  lancamentos: any[] = [];
+  // lancamentos = [
+  //   new Lancamento(
+  //     'Restaurante',
+  //     new Date('07/08/2020'),
+  //     new Date('07/08/2020'),
+  //     15.98,
+  //     'DESPESA'
+  //   ),
+  //   new Lancamento(
+  //     'Salário',
+  //     new Date('07/08/2020'),
+  //     new Date('07/08/2020'),
+  //     120,
+  //     'RECEITA'
+  //   ),
+  //   new Lancamento(
+  //     'Abastecimento',
+  //     new Date('07/08/2020'),
+  //     new Date('07/08/2020'),
+  //     120,
+  //     'DESPESA'
+  //   ),
+  // ];
+
+  constructor(private lancamentoService: LancamentoService) {}
+
+  ngOnInit(): void {
+    this.lancamentoService.pesquisar().subscribe(retorno => {
+      this.lancamentos = retorno.content;
+    });
+  }
+
 }
 export class Lancamento {
   descricao: string;

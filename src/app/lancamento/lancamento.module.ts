@@ -2,6 +2,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 import { CalendarModule } from 'primeng/calendar';
 import { TableModule } from 'primeng/table';
@@ -30,6 +31,8 @@ import { SharedModule } from './../shared/shared.module';
     FormsModule,
     // FontAwesomeModule,
     // NgbModule,
+
+    HttpClientModule,
 
     // PrimeNG
     CalendarModule,
