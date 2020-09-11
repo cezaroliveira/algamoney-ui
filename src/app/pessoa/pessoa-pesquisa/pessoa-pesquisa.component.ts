@@ -1,3 +1,4 @@
+import { PessoaService } from './../pessoa.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -5,12 +6,21 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './pessoa-pesquisa.component.html',
   styleUrls: ['./pessoa-pesquisa.component.css'],
 })
-export class PessoaPesquisaComponent {
-  pessoas = [
-    new Pessoa('João', 'Contagem', 'MG', true),
-    new Pessoa('Pedro', 'Betim', 'MG', true),
-    new Pessoa('Maria', 'Rio de Janeiro', 'RJ', false),
-  ];
+export class PessoaPesquisaComponent implements OnInit {
+  pessoas: any[] = [];
+  // pessoas = [
+  //   new Pessoa('João', 'Contagem', 'MG', true),
+  //   new Pessoa('Pedro', 'Betim', 'MG', true),
+  //   new Pessoa('Maria', 'Rio de Janeiro', 'RJ', false),
+  // ];
+
+  constructor(private pessoaService: PessoaService) {}
+
+  ngOnInit(): void {
+    this.pessoaService.pesquisar().subscribe(retorno => {
+      this.pessoas = retorno/*.content*/;
+    });
+  }
 }
 export class Pessoa {
   nome: string;
