@@ -1,4 +1,4 @@
-import { Lancamento } from './lancamento.model';
+import { Pessoa } from './pessoa.model';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -6,9 +6,9 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class LancamentoService {
+export class PessoaService {
 
-  urlService = 'http://localhost:8080/lancamentos';
+  urlService = 'http://localhost:8080/pessoas';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
@@ -19,22 +19,22 @@ export class LancamentoService {
   constructor(private http: HttpClient) {}
 
   pesquisar(): Observable<any> {
-    return this.http.get<Lancamento>(this.urlService, this.httpOptions);
+    return this.http.get<Pessoa>(this.urlService, this.httpOptions);
   }
 
-  // obter(lancamento: Partial<Lancamento>): Observable<Lancamento> {
-  //   return this.http.get<Lancamento>(`${this.urlService}\\${lancamento.codigo}`);
+  // obter(pessoa: Partial<Pessoa>): Observable<Pessoa> {
+  //   return this.http.get<Pessoa>(`${this.urlService}\\${pessoa.codigo}`);
   // }
 
-  // adicionar(lancamento: Lancamento): Observable<any> {
-  //   return this.http.post(this.urlService, lancamento);
+  // adicionar(pessoa: Pessoa): Observable<any> {
+  //   return this.http.post(this.urlService, pessoa);
   // }
 
-  // alterar(lancamento: Partial<Lancamento>): Observable<any> {
-  //   return this.http.put(`${this.urlService}\\${lancamento.codigo}`, lancamento);
+  // alterar(pessoa: Partial<Pessoa>): Observable<any> {
+  //   return this.http.put(`${this.urlService}\\${pessoa.codigo}`, pessoa);
   // }
 
-  // excluir(lancamento: Partial<Lancamento>): Observable<any> {
-  //   return this.http.delete(`${this.urlService}\\${lancamento.codigo}`);
+  // excluir(pessoa: Partial<Pessoa>): Observable<any> {
+  //   return this.http.delete(`${this.urlService}\\${pessoa.codigo}`);
   // }
 }
