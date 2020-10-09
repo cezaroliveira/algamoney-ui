@@ -8,13 +8,12 @@ import { PessoaService } from './../pessoa.service';
   styleUrls: ['./pessoa-pesquisa.component.css'],
 })
 export class PessoaPesquisaComponent implements OnInit {
-  @Input() nome: string;
+  nome: string;
   pessoas: Pessoa[] = [];
 
   constructor(private pessoaService: PessoaService) {}
 
   ngOnInit(): void {
-    console.log('iniciando o componente', this.nome);
     this.pesquisar();
   }
 
@@ -22,11 +21,7 @@ export class PessoaPesquisaComponent implements OnInit {
     this.pessoaService.pesquisar({
       nome: this.nome
     }).subscribe(retorno => {
-      console.log('retornando os dados da api');
-
       this.pessoas = retorno.content;
-
-      console.log(retorno.content, this.pessoas);
     });
   }
 
