@@ -4,3 +4,7 @@ export interface Pessoa {
   estado: string;
   ativo: boolean;
 }
+
+export interface PessoaFilter {
+  nome: string;
+}

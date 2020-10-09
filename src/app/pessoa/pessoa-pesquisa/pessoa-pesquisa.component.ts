@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { PessoaService } from './../pessoa.service';
 
@@ -8,14 +8,20 @@ import { PessoaService } from './../pessoa.service';
   styleUrls: ['./pessoa-pesquisa.component.css'],
 })
 export class PessoaPesquisaComponent implements OnInit {
+  @Input() nome: string;
   pessoas: Pessoa[] = [];
 
   constructor(private pessoaService: PessoaService) {}
 
   ngOnInit(): void {
-    console.log('iniciando o componente');
+    console.log('iniciando o componente', this.nome);
+    this.pesquisar();
+  }
 
-    this.pessoaService.pesquisar().subscribe(retorno => {
+  pesquisar(): void {
+    this.pessoaService.pesquisar({
+      nome: this.nome
+    }).subscribe(retorno => {
       console.log('retornando os dados da api');
 
       this.pessoas = retorno.content;
@@ -25,6 +31,7 @@ export class PessoaPesquisaComponent implements OnInit {
   }
 
 }
+
 export class Pessoa {
   nome: string;
   cidade: string;

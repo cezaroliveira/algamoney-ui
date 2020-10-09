@@ -1,6 +1,6 @@
-import { Pessoa } from './pessoa.model';
+import { Pessoa, PessoaFilter } from './pessoa.model';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -9,17 +9,27 @@ import { Observable } from 'rxjs';
 export class PessoaService {
 
   urlService = 'http://localhost:8080/pessoas';
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MDE0Mjk4ODEsInVzZXJfbmFtZSI6ImFkbWluQGFsZ2Ftb25leS5jb20iLCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSIsIlJPTEVfUkVNT1ZFUl9DQVRFR09SSUEiXSwianRpIjoiNzE2MGNlOGItMzQ5Yi00NjI1LWFmMzktOGM2MzNlYjRkN2UwIiwiY2xpZW50X2lkIjoiYW5ndWxhciIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdfQ.Yw_S6pef0buY0t4gsCn7hDw72XoDbFEQrPtBH5gQinU'
-    })
-  };
+  headers = new HttpHeaders({
+    'Content-Type':  'application/json',
+    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNjAyMjAzMjg1LCJhdXRob3JpdGllcyI6WyJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9QRVNRVUlTQVJfVVNVQVJJTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX0NBREFTVFJBUl9QRVNTT0EiLCJST0xFX0FUVUFMSVpBUl9DQVRFR09SSUEiLCJST0xFX0NBREFTVFJBUl9VU1VBUklPIiwiUk9MRV9BVFVBTElaQVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX0NBVEVHT1JJQSIsIlJPTEVfUEVTUVVJU0FSX1BFU1NPQSIsIlJPTEVfQVRVQUxJWkFSX1VTVUFSSU8iLCJST0xFX0NBREFTVFJBUl9MQU5DQU1FTlRPIiwiUk9MRV9SRU1PVkVSX0xBTkNBTUVOVE8iLCJST0xFX1BFU1FVSVNBUl9DQVRFR09SSUEiLCJST0xFX1JFTU9WRVJfQ0FURUdPUklBIiwiUk9MRV9SRU1PVkVSX1VTVUFSSU8iLCJST0xFX0FUVUFMSVpBUl9QRVNTT0EiXSwianRpIjoiNDZiNTYwZTktYjBmMy00ZWVhLWFjMDQtMGZkNjY4MzMzZGIyIiwiZW1haWwiOiJhZG1pbkBhbGdhbW9uZXkuY29tIiwiY2xpZW50X2lkIjoiYW5ndWxhciJ9.ROflK8Bb7mT94sevFNIAlVQqCWxzrg16rCL_ROaj94Y'
+  });
 
   constructor(private http: HttpClient) {}
 
-  pesquisar(): Observable<any> {
-    return this.http.get<Pessoa>(this.urlService, this.httpOptions);
+  pesquisar(filtro?: PessoaFilter): Observable<any> {
+
+    let params = new HttpParams();
+
+    if (filtro) {
+      if (filtro.nome) {
+        params = params.set('$filter', `(nome contains '` + filtro.nome + `')`);
+      }
+    }
+
+    return this.http.get<Pessoa>(this.urlService, {
+      headers: this.headers,
+      params
+    });
   }
 
   // obter(pessoa: Partial<Pessoa>): Observable<Pessoa> {
