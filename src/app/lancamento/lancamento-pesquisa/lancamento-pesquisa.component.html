@@ -1,27 +1,51 @@
 <div class="container">
   <div>
-    <h1 style="font-weight: bold;">Lançamentos</h1>
-    <hr>
+    <h1 style="font-weight: bold">Lançamentos</h1>
+    <hr />
   </div>
-  <div class="form-group">
-    <label for="descricao" class="block form-control-label">Descrição</label>
-    <input inputId="descricao" type="text" placeholder="Descrição" class="form-control" pInputText />
-  </div>
-  <div class="form-group">
-    <label for="dtInicio" class="block form-control-label">Vencimento</label>
-    <p-calendar inputId="dtInicio" aria-placeholder="Data início" [showIcon]="true"></p-calendar>
-    <label class="form-control-label">até</label>
-    <p-calendar inputId="dtFim" aria-placeholder="Data fim" [showIcon]="true"></p-calendar>
-  </div>
-  <div class="form-group">
-    <button
-      pButton
-      pRipple
-      type="submit"
-      label="Pesquisar"
-      icon="pi pi-search"
-    ></button>
-  </div>
+  <form (ngSubmit)="pesquisar()">
+    <div class="form-group">
+      <label for="descricao" class="block form-control-label">Descrição</label>
+      <input
+        inputId="descricao"
+        type="text"
+        placeholder="Descrição"
+        class="form-control"
+        pInputText
+        name="descricao"
+        [(ngModel)]="descricao"
+      />
+    </div>
+    <div class="form-group">
+      <label for="dtInicio" class="block form-control-label">Vencimento</label>
+      <p-calendar
+        inputId="dtInicio"
+        aria-placeholder="Data início"
+        [showIcon]="true"
+        dateFormat="dd/mm/yy"
+        [name]="dtInicio"
+        [(ngModel)]="dtInicio"
+      ></p-calendar>
+      <label class="form-control-label">até</label>
+      <p-calendar
+        inputId="dtFim"
+        aria-placeholder="Data fim"
+        [showIcon]="true"
+        dateFormat="dd/mm/yy"
+        [name]="dtFim"
+        [(ngModel)]="dtFim"
+      ></p-calendar>
+    </div>
+    <div class="form-group">
+      <button
+        pButton
+        pRipple
+        type="submit"
+        label="Pesquisar"
+        icon="pi pi-search"
+      ></button>
+    </div>
+  </form>
   <div class="form-group">
     <app-lancamento-grid [lancamentos]="lancamentos"></app-lancamento-grid>
   </div>

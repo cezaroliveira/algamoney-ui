@@ -7,3 +7,9 @@ export interface Lancamento {
   observacao: string;
   tipo: string;
 }
+
+export interface LancamentoFilter {
+  descricao: string;
+  dataVencimentoInicio: Date;
+  dataVencimentoFim: Date;
+}

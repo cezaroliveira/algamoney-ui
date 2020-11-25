@@ -1,3 +1,4 @@
+import { NodeWithI18n } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 
 import { LancamentoService } from './../lancamento.service';
@@ -8,40 +9,33 @@ import { LancamentoService } from './../lancamento.service';
   styleUrls: ['./lancamento-pesquisa.component.css'],
 })
 export class LancamentoPesquisaComponent implements OnInit {
-  lancamentos: any[] = [];
-  // lancamentos = [
-  //   new Lancamento(
-  //     'Restaurante',
-  //     new Date('07/08/2020'),
-  //     new Date('07/08/2020'),
-  //     15.98,
-  //     'DESPESA'
-  //   ),
-  //   new Lancamento(
-  //     'Salário',
-  //     new Date('07/08/2020'),
-  //     new Date('07/08/2020'),
-  //     120,
-  //     'RECEITA'
-  //   ),
-  //   new Lancamento(
-  //     'Abastecimento',
-  //     new Date('07/08/2020'),
-  //     new Date('07/08/2020'),
-  //     120,
-  //     'DESPESA'
-  //   ),
-  // ];
+  lancamentos: Lancamento[] = [];
+  descricao: string;
+  dtInicio = new Date();
+  dtFim = new Date();
+  // dtInicio: Date = null;
+  // dtFim: Date = null;
 
   constructor(private lancamentoService: LancamentoService) {}
 
   ngOnInit(): void {
-    this.lancamentoService.pesquisar().subscribe(retorno => {
+    this.pesquisar();
+  }
+
+  pesquisar(): void {
+    console.log(this.descricao, this.dtInicio, this.dtFim);
+
+    this.lancamentoService.pesquisar({
+      descricao: this.descricao,
+      dataVencimentoInicio: this.dtInicio,
+      dataVencimentoFim: this.dtFim
+    }).subscribe(retorno => {
       this.lancamentos = retorno.content;
     });
   }
 
 }
+
 export class Lancamento {
   descricao: string;
   dataVencimento: Date;
