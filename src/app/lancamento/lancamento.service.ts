@@ -60,21 +60,16 @@ export class LancamentoService {
 
     if (filtro.descricao) {
       params = params.append('descricao', filtro.descricao);
-      console.log('Filtro da descricao', params);
     }
 
     if (filtro.dataVencimentoInicio) {
       filtro.dataVencimentoInicio.setHours(0, 0, 0, 0);
-
-      console.log(filtro.dataVencimentoInicio.toISOString(), filtro.dataVencimentoInicio.toUTCString(), moment(filtro.dataVencimentoInicio).format('YYYY-MM-DD'));
-
-      params = params.append('dataVencimentoInicio', moment(filtro.dataVencimentoInicio).format('YYYY-MM-DD'));
+      params = params.append('dataVencimentoInicio', moment(filtro.dataVencimentoInicio).format('DD-MM-YYYY'));
     }
 
     if (filtro.dataVencimentoFim) {
       filtro.dataVencimentoFim.setHours(0, 0, 0, 0);
-
-      // params = params.append('dataVencimentoFim', moment(filtro.dataVencimentoFim).format('YYYY-MM-DDTHH:mm:ss'));
+      params = params.append('dataVencimentoFim', moment(filtro.dataVencimentoFim).format('DD-MM-YYYY'));
     }
 
     return params;
